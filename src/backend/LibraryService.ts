@@ -1,6 +1,13 @@
 import * as LibraryDAO from './LibraryDAO';
 
-export function listAllUsers() {
-  console.log(LibraryDAO.readAll());
+export async function listAllUsers() {
+  return(await LibraryDAO.readAll());
 }
 
+export function registerUser(data) {
+  LibraryDAO.register(data);
+}
+
+export function deleteUser(data) {
+  LibraryDAO.deleteUser(data);
+}
