@@ -1,17 +1,26 @@
-import * as LibraryDAO from './LibraryDAOUsers';
+import * as LibraryDAOUsers from './LibraryDAOUsers';
+import * as LibraryDAOStuffs from './LibraryDAOStuffs';
 
 export async function listAllUsers(data) {
-  return(await LibraryDAO.readAll(data));
+  return(await LibraryDAOUsers.readAll(data));
 }
 
 export function registerUser(data) {
-  LibraryDAO.register(data);
+  LibraryDAOUsers.register(data);
 }
 
 export function deleteUser(data) {
-  LibraryDAO.deleteUser(data);
+  LibraryDAOUsers.deleteUser(data);
 }
 
 export function updateUser(data) {
-  LibraryDAO.updateUser(data);
+  LibraryDAOUsers.updateUser(data);
+}
+
+export async function listAllStuffs(data){
+  return(await LibraryDAOStuffs.readAll(data));
+}
+
+export function addNewStuff(data) {
+  LibraryDAOStuffs.addNewStuff(data);
 }
