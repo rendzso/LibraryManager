@@ -53,4 +53,12 @@ export async function updateUser(data) {
   });
 }
 
-
+export async function rentAStuff(user, stuff){
+  const client = new MongoClient(url);
+  db = await client.connect(() => {
+    console.log('connected to db');
+    db = client.db(dbname);
+    db.collection(collectionname).updateOne({ "userID" : user.userID }, {$set: data});
+    client.close();
+  });
+}

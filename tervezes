@@ -1,0 +1,18 @@
+Tagok: 
+	-ID
+	-név
+	-telefonszám
+	-lakcím
+	-személyigazolvány szám
+	-kölcsönzött cucc1
+	-kölcsönzött cucc2
+	-kölcsönzött cucc3
+	OPTIONAL ISDELETED
+
+Cuccok:
+	-típus
+	-szerző
+	-cím
+	-beszerzés dátuma
+	-sorszám
+	-státusz

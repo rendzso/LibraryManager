@@ -10,6 +10,6 @@ router.get('/list', async (req, res) => {
 router.post('/add', (req, res) => {
   srs.addNewStuff(req.body);
   res.status(200).send('Stuff added.');
-})
+});
 
 module.exports = router;
