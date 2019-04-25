@@ -1,4 +1,5 @@
 import {MongoClient, Db} from 'mongodb';
+import * as moment from 'moment';
 
 const url = 'mongodb://localhost:27017';
 const dbname = 'LibraryManager';
@@ -58,7 +59,19 @@ export async function rentAStuff(user, stuff){
   db = await client.connect(() => {
     console.log('connected to db');
     db = client.db(dbname);
-    db.collection(collectionname).updateOne({ "userID" : user.userID }, {$set: data});
+    db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "rented"}});
+    db.collection(collectionname).updateOne({ "userID" : user }, {$push: {"rented": {"stuffID": stuff, "dateOfRent": moment().format('YYYY.MM.DD'), "dateOfBack": moment().add(30, 'days').format('YYYY.MM.DD')}}});
+    client.close();
+  });
+}
+
+export async function backAStuff(user, stuff) {
+  const client = new MongoClient(url);
+  db = await client.connect(() => {
+    console.log('connected to db');
+    db = client.db(dbname);
+    db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "open"}});
+    db.collection(collectionname).updateOne({ "userID" : user }, {$pull: { "rented": {"stuffID": stuff}}});
     client.close();
   });
 }

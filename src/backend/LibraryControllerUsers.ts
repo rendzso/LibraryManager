@@ -22,4 +22,14 @@ router.post('/update', (req, res) => {
   res.status(200).send('User updated.');
 });
 
+router.post('/rent', (req, res) =>{
+  srs.rentAStuff(req.query.userID, req.query.stuffID);
+  res.status(200).send('Rent is registered.');
+});
+
+router.post('/back', (req, res) =>{
+  srs.backAStuff(req.query.userID, req.query.stuffID);
+  res.status(200).send('Item is backed.');
+});
+
 module.exports = router;

@@ -17,10 +17,18 @@ export function updateUser(data) {
   LibraryDAOUsers.updateUser(data);
 }
 
-export async function listAllStuffs(data){
+export async function listAllStuffs(data) {
   return(await LibraryDAOStuffs.readAll(data));
 }
 
 export function addNewStuff(data) {
   LibraryDAOStuffs.addNewStuff(data);
+}
+
+export function rentAStuff(user, stuff) {
+  LibraryDAOUsers.rentAStuff(user, stuff);
+}
+
+export function backAStuff(user, stuff) {
+  LibraryDAOUsers.backAStuff(user, stuff);
 }

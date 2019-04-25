@@ -26,7 +26,8 @@
     "express": "^4.16.4",
     "body-parser": "^1.18.3",
     "mongodb": "^3.2.3",
-    "assert": "^1.4.1"
+    "assert": "^1.4.1",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
