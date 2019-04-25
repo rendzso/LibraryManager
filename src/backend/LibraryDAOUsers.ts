@@ -59,7 +59,7 @@ export async function rentAStuff(user, stuff){
   db = await client.connect(() => {
     console.log('connected to db');
     db = client.db(dbname);
-    db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "rented"}});
+    db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "rented", "rentID": user}});
     db.collection(collectionname).updateOne({ "userID" : user }, {$push: {"rented": {"stuffID": stuff, "dateOfRent": moment().format('YYYY.MM.DD'), "dateOfBack": moment().add(30, 'days').format('YYYY.MM.DD')}}});
     client.close();
   });
@@ -70,7 +70,7 @@ export async function backAStuff(user, stuff) {
   db = await client.connect(() => {
     console.log('connected to db');
     db = client.db(dbname);
-    db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "open"}});
+    db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "open", "rentID": "none"}});
     db.collection(collectionname).updateOne({ "userID" : user }, {$pull: { "rented": {"stuffID": stuff}}});
     client.close();
   });
