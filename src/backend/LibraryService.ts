@@ -9,8 +9,9 @@ export function registerUser(data) {
   LibraryDAOUsers.register(data);
 }
 
-export function deleteUser(name) {
-  LibraryDAOUsers.deleteUser(name);
+export async function deleteUser(user) {
+  console.log(await LibraryDAOUsers.deleteUser(user));
+  return(await LibraryDAOUsers.deleteUser(user));
 }
 
 export function updateUser(data) {

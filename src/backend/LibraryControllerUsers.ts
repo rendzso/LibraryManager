@@ -32,13 +32,13 @@ router.post('/add', (req, res) => {
   res.status(200).send('User registrated.');
 });
 
-router.post('/delete', (req, res) => {
-  if (req.query.name === undefined || req.query.name === '') {
+router.post('/delete', async (req, res) => {
+  if (req.query.userID === undefined || req.query.userID === '') {
     res.status(414).send('User name is missing!');
     return;
   }
-  srs.deleteUser(req.query.name);
-  res.status(200).send('User deleted.');
+  await srs.deleteUser(req.query.userID);
+  res.status(200).send('something...');
 });
 
 router.post('/update', (req, res) => {

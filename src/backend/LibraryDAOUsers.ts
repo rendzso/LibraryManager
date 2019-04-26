@@ -19,6 +19,17 @@ function read(data) {
   });
 }
 
+function exists(user) {
+  return new Promise(async resolve => {
+    const client = new MongoClient(url);
+    db = await client.connect(() => {
+      console.log('connected to db');
+      db = client.db(dbname);
+      resolve(db.collection(collectionname).find({"userID": user}).count());
+    });
+  });
+}
+
 export async function readAll(data) {
   const resoult = await read(data);
   return resoult;
@@ -34,13 +45,19 @@ export async function register(data) {
   });
 }
 
-export async function deleteUser(name) {
+export async function deleteUser(user) {
   const client = new MongoClient(url);
-  db = await client.connect(() => {
+  db = await client.connect(async () => {
     console.log('connected to db');
     db = client.db(dbname);
-    db.collection(collectionname).updateOne({ "name" : name }, {$set: {"itsDeleted": "deleted"}});
-    client.close();
+    if ((await exists(user)) === 1 ) {
+      db.collection(collectionname).updateOne({ "userID" : user }, {$set: {"itsDeleted": "deleted"}});
+      client.close();
+      return 'User is deleted.';
+    } else {
+      client.close();
+      return 'User doednot exists or already deleted.';
+    }
   });
 }
 
