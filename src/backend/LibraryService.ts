@@ -36,3 +36,7 @@ export function backAStuff(user, stuff) {
 export async function listOfLateness() {
   return(await LibraryDAOUsers.listOfLateness());
 }
+
+export async function listOfRentedStuffs() {
+  return(await LibraryDAOUsers.listOfRentedStuffs());
+}

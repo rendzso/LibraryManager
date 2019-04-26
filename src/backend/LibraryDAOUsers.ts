@@ -60,7 +60,7 @@ export async function rentAStuff(user, stuff){
     console.log('connected to db');
     db = client.db(dbname);
     db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "rented", "rentID": user}});
-    db.collection(collectionname).updateOne({ "userID" : user }, {$push: {"rented": {"stuffID": stuff, "dateOfRent": moment().format('YYYY.MM.DD'), "dateOfBack": moment().add(30, 'days').format('YYYY.MM.DD')}}});
+    db.collection("LibraryManagerRented").insertOne({ "userID" : user, "stuffID": stuff, "dateOfRent": moment().format('YYYY.MM.DD'), "dateOfBack": moment().add(30, 'days').format('YYYY.MM.DD')});
     client.close();
   });
 }
@@ -71,9 +71,26 @@ export async function backAStuff(user, stuff) {
     console.log('connected to db');
     db = client.db(dbname);
     db.collection("LibraryManagerStuffs").updateOne({"stuffID": stuff}, {$set: {"status": "open", "rentID": "none"}});
-    db.collection(collectionname).updateOne({ "userID" : user }, {$pull: { "rented": {"stuffID": stuff}}});
+    db.collection("LibraryManagerRented").deleteOne({ "userID" : user , "stuffID": stuff});
     client.close();
   });
+}
+
+function rented() {
+  return new Promise(async resolve => {
+    const client = new MongoClient(url);
+    db = await client.connect(() => {
+      console.log('connected to db');
+      db = client.db(dbname);
+      resolve(db.collection("LibraryManagerRented").find().toArray());
+      client.close();
+    });
+  });
+}
+
+export async function listOfRentedStuffs() {
+  const resoult = await rented();
+  return resoult;
 }
 
 function late() {
@@ -82,7 +99,7 @@ function late() {
     db = await client.connect(() => {
       console.log('connected to db');
       db = client.db(dbname);
-      resolve(db.collection(collectionname).find({"rented" : {"dateOfBack" : {$elemMatch:  {$lte: moment().format('YYYY.MM.DD')}}}}).toArray());
+      resolve(db.collection("LibraryManagerRented").find({"dateOfBack" : {$lte: moment().format('YYYY.MM.DD')}}).toArray());
       client.close();
     });
   });

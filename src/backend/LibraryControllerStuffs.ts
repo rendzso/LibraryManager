@@ -12,4 +12,8 @@ router.post('/add', (req, res) => {
   res.status(200).send('Stuff added.');
 });
 
+router.get('/rented', async (req, res) => {
+  res.status(200).send(await srs.listOfRentedStuffs());
+});
+
 module.exports = router;
