@@ -22,14 +22,18 @@ router.post('/update', (req, res) => {
   res.status(200).send('User updated.');
 });
 
-router.post('/rent', (req, res) =>{
+router.post('/rent', (req, res) => {
   srs.rentAStuff(req.query.userID, req.query.stuffID);
   res.status(200).send('Rent is registered.');
 });
 
-router.post('/back', (req, res) =>{
+router.post('/back', (req, res) => {
   srs.backAStuff(req.query.userID, req.query.stuffID);
   res.status(200).send('Item is backed.');
+});
+
+router.get('/late', async (req, res) => {
+  res.status(200).send(await srs.listOfLateness());
 });
 
 module.exports = router;

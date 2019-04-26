@@ -32,3 +32,7 @@ export function rentAStuff(user, stuff) {
 export function backAStuff(user, stuff) {
   LibraryDAOUsers.backAStuff(user, stuff);
 }
+
+export async function listOfLateness() {
+  return(await LibraryDAOUsers.listOfLateness());
+}

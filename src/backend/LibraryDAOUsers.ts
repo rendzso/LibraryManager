@@ -75,3 +75,20 @@ export async function backAStuff(user, stuff) {
     client.close();
   });
 }
+
+function late() {
+  return new Promise(async resolve => {
+    const client = new MongoClient(url);
+    db = await client.connect(() => {
+      console.log('connected to db');
+      db = client.db(dbname);
+      resolve(db.collection(collectionname).find({"rented" : {"dateOfBack" : {$elemMatch:  {$lte: moment().format('YYYY.MM.DD')}}}}).toArray());
+      client.close();
+    });
+  });
+}
+
+export async function listOfLateness() {
+  const resoult = await late();
+  return resoult;
+}

@@ -16,3 +16,9 @@ Cuccok:
 	-beszerzés dátuma
 	-sorszám
 	-státusz
+
+	db.collection(collectionname).updateOne({ "userID" : user }, {$push: {"rented": {"stuffID": stuff, "dateOfRent": moment().format('YYYY.MM.DD'), "dateOfBack": moment().add(30, 'days').format('YYYY.MM.DD')}}});
+
+	db.LibraryManagerUsers.updateOne({"userID":"user02"},{$push: {"rented": {"stuffID":"idid","dateOfRent":"2000.01.01","dateOfBack":"2019.04.10"}}})
+
+	resolve(db.collection(collectionname).find({}, {"rented" : {"dateOfBack" : {$elemMatch: {$lte: moment().format('YYYY.MM.DD')}}}}).toArray());
