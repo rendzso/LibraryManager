@@ -36,4 +36,9 @@ router.get('/late', async (req, res) => {
   res.status(200).send(await srs.listOfLateness());
 });
 
+router.get('/count', async (req, res) => {
+  const thenumber = await srs.countByUser(req.query.userID);
+  res.status(200).send('it is ready, the count is: ' + thenumber);
+});
+
 module.exports = router;

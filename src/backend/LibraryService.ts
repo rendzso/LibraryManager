@@ -40,3 +40,7 @@ export async function listOfLateness() {
 export async function listOfRentedStuffs() {
   return(await LibraryDAOUsers.listOfRentedStuffs());
 }
+
+export async function countByUser(user) {
+  return(await LibraryDAOUsers.countByUser(user));
+}

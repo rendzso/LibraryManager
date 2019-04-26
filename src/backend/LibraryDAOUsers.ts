@@ -109,3 +109,20 @@ export async function listOfLateness() {
   const resoult = await late();
   return resoult;
 }
+
+function count(user) {
+  return new Promise(async resolve => {
+    const client = new MongoClient(url);
+    db = await client.connect(() => {
+      console.log('connected to db');
+      db = client.db(dbname);
+      resolve(db.collection("LibraryManagerRented").find({"userID": user}).count());
+      client.close();
+    });
+  });
+}
+
+export async function countByUser(user) {
+  const resoult = await count(user);
+  return resoult;
+}
