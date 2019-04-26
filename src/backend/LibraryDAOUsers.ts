@@ -34,12 +34,12 @@ export async function register(data) {
   });
 }
 
-export async function deleteUser(data) {
+export async function deleteUser(name) {
   const client = new MongoClient(url);
   db = await client.connect(() => {
     console.log('connected to db');
     db = client.db(dbname);
-    db.collection(collectionname).updateOne({ "name" : data.name }, {$set: {"itsDeleted": "deleted"}});
+    db.collection(collectionname).updateOne({ "name" : name }, {$set: {"itsDeleted": "deleted"}});
     client.close();
   });
 }

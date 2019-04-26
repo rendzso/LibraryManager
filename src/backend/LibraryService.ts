@@ -9,8 +9,8 @@ export function registerUser(data) {
   LibraryDAOUsers.register(data);
 }
 
-export function deleteUser(data) {
-  LibraryDAOUsers.deleteUser(data);
+export function deleteUser(name) {
+  LibraryDAOUsers.deleteUser(name);
 }
 
 export function updateUser(data) {
