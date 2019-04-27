@@ -10,8 +10,12 @@ export function registerUser(data) {
 }
 
 export async function deleteUser(user) {
-  console.log(await LibraryDAOUsers.deleteUser(user));
-  return(await LibraryDAOUsers.deleteUser(user));
+  if ((await LibraryDAOUsers.exists(user))  === 1 && (await LibraryDAOUsers.notDeleted(user)) === 0) {
+    await LibraryDAOUsers.deleteUser(user);
+    return 'User is deleted!';
+  } else {
+    return 'User does not exists, or already deleted!';
+  }
 }
 
 export function updateUser(data) {

@@ -37,8 +37,7 @@ router.post('/delete', async (req, res) => {
     res.status(414).send('User name is missing!');
     return;
   }
-  await srs.deleteUser(req.query.userID);
-  res.status(200).send('something...');
+  res.status(200).send(await srs.deleteUser(req.query.userID));
 });
 
 router.post('/update', (req, res) => {
