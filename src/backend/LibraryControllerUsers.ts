@@ -63,7 +63,7 @@ router.post('/update', async (req, res) => {
   res.status(200).send(await srs.updateUser(req.body));
 });
 
-router.post('/rent', (req, res) => {
+router.post('/rent', async (req, res) => {
   if (req.query.userID === undefined || req.query.userID === '') {
     res.status(414).send('UserID name is missing!');
     return;
@@ -72,11 +72,10 @@ router.post('/rent', (req, res) => {
     res.status(414).send('UserID name is missing!');
     return;
   }
-  srs.rentAStuff(req.query.userID, req.query.stuffID);
-  res.status(200).send('Rent is registered.');
+  res.status(200).send(await srs.rentAStuff(req.query.userID, req.query.stuffID));
 });
 
-router.post('/back', (req, res) => {
+router.post('/back', async (req, res) => {
   if (req.query.userID === undefined || req.query.userID === '') {
     res.status(414).send('UserID name is missing!');
     return;
@@ -85,8 +84,7 @@ router.post('/back', (req, res) => {
     res.status(414).send('UserID name is missing!');
     return;
   }
-  srs.backAStuff(req.query.userID, req.query.stuffID);
-  res.status(200).send('Item is backed.');
+  res.status(200).send(await srs.backAStuff(req.query.userID, req.query.stuffID));
 });
 
 router.get('/late', async (req, res) => {

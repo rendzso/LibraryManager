@@ -7,7 +7,7 @@ router.get('/list', async (req, res) => {
   res.status(200).send(await srs.listAllStuffs(req.query));
 });
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
   if (req.body.type === undefined || req.body.type === '') {
     res.status(414).send('Type is missing!');
     return;
@@ -30,8 +30,7 @@ router.post('/add', (req, res) => {
   }
   req.body.status = 'open';
   req.body.rentID = 'none';
-  srs.addNewStuff(req.body);
-  res.status(200).send('Stuff added.');
+  res.status(200).send(await srs.addNewStuff(req.body));
 });
 
 router.get('/rented', async (req, res) => {

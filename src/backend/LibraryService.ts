@@ -37,15 +37,30 @@ export async function listAllStuffs(data) {
 }
 
 export async function addNewStuff(data) {
-  LibraryDAOStuffs.addNewStuff(data);
+  if ((await LibraryDAOStuffs.exists(data.stuffID)) === 1) {
+    return 'The ID is already exists!';
+  } else {
+    LibraryDAOStuffs.addNewStuff(data);
+    return 'Stuff is added!';
+  }
 }
 
-export function rentAStuff(user, stuff) {
-  LibraryDAOUsers.rentAStuff(user, stuff);
+export async function rentAStuff(user, stuff) {
+  if ((await LibraryDAOUsers.exists(user)) === 1 && (await LibraryDAOUsers.notDeleted(user)) === 0 && ((await LibraryDAOStuffs.exists(stuff)) === 1) && (await LibraryDAOStuffs.isRented(stuff) === 1) && (await LibraryDAOUsers.countByUser(user)) < 3) {
+    LibraryDAOUsers.rentAStuff(user, stuff);
+    return 'Rent is OK!';
+  } else {
+    return 'The user does not exists, or the stuff does not exists, or already rented, or reached the maximum item!';
+  }
 }
 
-export function backAStuff(user, stuff) {
-  LibraryDAOUsers.backAStuff(user, stuff);
+export async function backAStuff(user, stuff) {
+  if ((await LibraryDAOUsers.exists(user)) === 1 && ((await LibraryDAOStuffs.exists(stuff)) === 1) && (await LibraryDAOStuffs.isRented(stuff) === 0)) {
+    LibraryDAOUsers.backAStuff(user, stuff);
+    return 'The stuff is backed.';
+  } else {
+    return 'User does not exists, or stuff does not exists, or the stuff is not rendet!';
+  }
 }
 
 export async function listOfLateness() {

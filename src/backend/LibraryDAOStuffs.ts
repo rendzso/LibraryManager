@@ -31,3 +31,26 @@ export async function addNewStuff(data) {
     client.close();
   });
 }
+
+export function exists(stuff) {
+  return new Promise(async resolve => {
+    const client = new MongoClient(url);
+    db = await client.connect(() => {
+      console.log('connected to db');
+      db = client.db(dbname);
+      resolve(db.collection(collectionname).find({"stuffID": stuff}).count());
+    });
+  });
+}
+
+export function isRented(stuff) {
+  return new Promise(async resolve => {
+    const client = new MongoClient(url);
+    db = await client.connect(() => {
+      console.log('connected to db');
+      db = client.db(dbname);
+      resolve(db.collection(collectionname).find({"stuffID": stuff, "rentID": "none"}).count());
+    });
+  });
+}
+

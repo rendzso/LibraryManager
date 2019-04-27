@@ -146,5 +146,6 @@ function count(user) {
 
 export async function countByUser(user) {
   const resoult = await count(user);
+  console.log(resoult);
   return resoult;
 }
