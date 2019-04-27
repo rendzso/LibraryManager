@@ -5,8 +5,13 @@ export async function listAllUsers(data) {
   return(await LibraryDAOUsers.readAll(data));
 }
 
-export function registerUser(data) {
-  LibraryDAOUsers.register(data);
+export async function registerUser(data) {
+  if ((await LibraryDAOUsers.exists(data.userID)) === 1) {
+    return 'UserID is used. Change it!';
+  } else {
+    LibraryDAOUsers.register(data);
+    return 'User added!';
+  }
 }
 
 export async function deleteUser(user) {
@@ -18,15 +23,20 @@ export async function deleteUser(user) {
   }
 }
 
-export function updateUser(data) {
-  LibraryDAOUsers.updateUser(data);
+export async function updateUser(data) {
+  if ((await LibraryDAOUsers.exists(data.userID)) === 1 && (await LibraryDAOUsers.notDeleted(data.userID)) === 0) {
+    LibraryDAOUsers.updateUser(data);
+    return 'User is updated!';
+  } else {
+    return 'User does not exists, or deleted!';
+  }
 }
 
 export async function listAllStuffs(data) {
   return(await LibraryDAOStuffs.readAll(data));
 }
 
-export function addNewStuff(data) {
+export async function addNewStuff(data) {
   LibraryDAOStuffs.addNewStuff(data);
 }
 

@@ -7,7 +7,7 @@ router.get('/list', async (req, res) => {
   res.status(200).send(await srs.listAllUsers(req.query));
 });
 
-router.post('/add', (req, res) => {
+router.post('/add', async (req, res) => {
   if (req.body.name === undefined || req.body.name === '') {
     res.status(414).send('User name is missing!');
     return;
@@ -28,8 +28,7 @@ router.post('/add', (req, res) => {
     res.status(414).send('PersonalID is missing!');
     return;
   }
-  srs.registerUser(req.body);
-  res.status(200).send('User registrated.');
+  res.status(200).send(await srs.registerUser(req.body));
 });
 
 router.post('/delete', async (req, res) => {
@@ -40,7 +39,7 @@ router.post('/delete', async (req, res) => {
   res.status(200).send(await srs.deleteUser(req.query.userID));
 });
 
-router.post('/update', (req, res) => {
+router.post('/update', async (req, res) => {
   if (req.body.name === '') {
     res.status(414).send('User name is missing!');
     return;
@@ -61,8 +60,7 @@ router.post('/update', (req, res) => {
     res.status(414).send('PersonalID is missing!');
     return;
   }
-  srs.updateUser(req.body);
-  res.status(200).send('User updated.');
+  res.status(200).send(await srs.updateUser(req.body));
 });
 
 router.post('/rent', (req, res) => {
