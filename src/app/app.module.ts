@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import {ServiceService} from './service.service';
 import {HttpClientModule} from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DialogModule} from 'primeng/dialog';
 
 
 @NgModule({
@@ -15,8 +18,11 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    DialogModule
   ],
   providers: [ServiceService],
   bootstrap: [AppComponent]

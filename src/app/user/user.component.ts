@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServiceService} from '../service.service';
+import {DialogModule} from 'primeng/dialog';
 
 @Component({
   selector: 'app-user',
@@ -12,6 +13,14 @@ export class UserComponent implements OnInit {
   count: any;
 
   constructor(private UserHandlerService: ServiceService) { }
+
+
+  display: boolean = false;
+
+  showDialog() {
+    this.display = true;
+  }
+
 
   async getData() {
     this.users = await this.UserHandlerService.getAllUser();

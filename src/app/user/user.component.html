@@ -1,30 +1,49 @@
+<div>
+  <p-dialog header="Godfather I" [(visible)]="display" [modal]="true" [responsive]="true"
+            [style]="{width: '350px', minWidth: '200px'}" [minY]="70"
+            [maximizable]="true" [baseZIndex]="10000">
+    <p>The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+      His beloved son Michael has just come home from the war, but does not intend to become part of his father's
+      business.
+      Through Michael's life the nature of the family business becomes clear. The business of the family is just like
+      the head of the family,
+      kind and benevolent to those who give respect,
+      but given to ruthless violence whenever anything stands against the good of the family.</p>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Yes">Yes</button>
+      <button type="button" pButton icon="pi pi-close" (click)="display=false" label="No"
+              class="ui-button-secondary">No</button>
+    </p-footer>
+  </p-dialog>
+</div>
+
+<button type="button" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Dialog</button>
+
 
 <button>Add User. Not created...</button><br/>
 <button (click)="getData()">Show All User</button>
 <div *ngIf="users">All user:
-<table border="3px solid black">
-  <div *ngFor="let user of users">
-    <tr>
-      Name: {{user.name}}
-    </tr>
-    <tr>
-      UserID: {{user.userID}}
-    </tr>
-    <tr>
-      Phone number: {{user.phone}}
-    </tr>
-    <tr>
-      Living Place: {{user.livingPlace}}
-    </tr>
-    <tr>
-      Personal ID: {{user.personalID}}
-    </tr>
-    <tr>
-      <button (click)="getCount(user.userID)">Count this user.</button>
-      <div *ngIf="count">{{count.asd}}</div>
-    </tr>
-  </div>
-</table>
+  <table border="3px solid black">
+    <div *ngFor="let user of users">
+      <tr>
+        Name: {{user.name}}
+      </tr>
+      <tr>
+        UserID: {{user.userID}}
+      </tr>
+      <tr>
+        Phone number: {{user.phone}}
+      </tr>
+      <tr>
+        Living Place: {{user.livingPlace}}
+      </tr>
+      <tr>
+        Personal ID: {{user.personalID}}
+      </tr>
+      <tr>
+        <button (click)="getCount(user.userID)">Count this user.</button>
+        <div *ngIf="count">{{count.asd}}</div>
+      </tr>
+    </div>
+  </table>
 </div>
-<div id="modal-container" class="hidden"></div>
-<div id="overlay" (click)="removeModal()" class="hidden"></div>
