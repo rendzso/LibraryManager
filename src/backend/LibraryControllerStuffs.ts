@@ -37,4 +37,5 @@ router.get('/rented', async (req, res) => {
   res.status(200).send(await srs.listOfRentedStuffs());
 });
 
+// @ts-ignore
 module.exports = router;

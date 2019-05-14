@@ -1,0 +1,30 @@
+
+<button>Add User. Not created...</button><br/>
+<button (click)="getData()">Show All User</button>
+<div *ngIf="users">All user:
+<table border="3px solid black">
+  <div *ngFor="let user of users">
+    <tr>
+      Name: {{user.name}}
+    </tr>
+    <tr>
+      UserID: {{user.userID}}
+    </tr>
+    <tr>
+      Phone number: {{user.phone}}
+    </tr>
+    <tr>
+      Living Place: {{user.livingPlace}}
+    </tr>
+    <tr>
+      Personal ID: {{user.personalID}}
+    </tr>
+    <tr>
+      <button (click)="getCount(user.userID)">Count this user.</button>
+      <div *ngIf="count">{{count.asd}}</div>
+    </tr>
+  </div>
+</table>
+</div>
+<div id="modal-container" class="hidden"></div>
+<div id="overlay" (click)="removeModal()" class="hidden"></div>

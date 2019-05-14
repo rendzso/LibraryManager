@@ -97,7 +97,8 @@ router.get('/count', async (req, res) => {
     return;
   }
   const thenumber = await srs.countByUser(req.query.userID);
-  res.status(200).send('it is ready, the count is: ' + thenumber);
+  res.status(200).send({asd: `it is ready, the count is: ${thenumber}`});
 });
 
+// @ts-ignore
 module.exports = router;
