@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5cc43637f4a4091f743c13a7"},"type":"book","author":"Darren Shan","title":"Rémségek Cirkusza2","date":"2000.12.01.","stuffID":"dar02","status":"open","rentID":"none"}
+{"_id":{"$oid":"5cc439f6d37f292183e8bf88"},"type":"book","author":"Darren Shan","title":"Rémségek Cirkusza2","date":"2000.12.01.","stuffID":"dar01","status":"open","rentID":"none"}
+{"_id":{"$oid":"5cc439fcd37f292183e8bf89"},"type":"book","author":"Darren Shan","title":"Rémségek Cirkusza2","date":"2000.12.01.","stuffID":"dar03","status":"rented","rentID":"user02"}
+{"_id":{"$oid":"5cc43a02d37f292183e8bf8a"},"type":"book","author":"Darren Shan","title":"Rémségek Cirkusza2","date":"2000.12.01.","stuffID":"dar04","status":"open","rentID":"none"}
+{"_id":{"$oid":"5cc43a40d37f292183e8bf8e"},"type":"book","author":"Darren Shan","title":"Rémségek Cirkusza2","date":"2000.12.01.","stuffID":"dar05","status":"open","rentID":"none"}
