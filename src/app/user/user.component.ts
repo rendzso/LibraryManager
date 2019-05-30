@@ -39,11 +39,11 @@ export class UserComponent implements OnInit {
   constructor(private UserHandlerService: ServiceService) {
   }
 
-  displayRegister: boolean = false;
-  displayUpdate: boolean = false;
-  displayRented: boolean = false;
-  displayRent: boolean = false;
-  displayLate: boolean = false;
+  displayRegister = false;
+  displayUpdate = false;
+  displayRented = false;
+  displayRent = false;
+  displayLate = false;
 
 
   showDialog() {
@@ -65,7 +65,7 @@ export class UserComponent implements OnInit {
   }
 
   async showRent(user) {
-    this.stuffs = await this.UserHandlerService.getAllStuffs();
+    this.stuffs = await this.UserHandlerService.getAllOpen();
     this.idForRent = user;
     this.displayRent = true;
   }
@@ -106,7 +106,7 @@ export class UserComponent implements OnInit {
 
   async rentStuff(filter) {
     await this.UserHandlerService.rentStuff(filter);
-    this.stuffs = await this.UserHandlerService.getAllStuffs();
+    this.stuffs = await this.UserHandlerService.getAllOpen();
   }
 
   ngOnInit() {

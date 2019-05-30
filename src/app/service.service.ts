@@ -130,13 +130,38 @@ deleteUser(filter) {
     });
   }
 
-  getAllStuffs(): Promise<any> {
+  getAllOpen(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:8080/stuffs/open')
         .subscribe(res => {
           resolve(res);
         }, (err) => {
           reject(err);
+        });
+    });
+  }
+
+  getAllStuff(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:8080/stuffs/list')
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+
+  addStuff(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post('http://localhost:8080/stuffs/add', obj)
+        .subscribe(res => {
+          resolve(res);
+          // @ts-ignore
+          alert(res.restext);
+        }, (err) => {
+          reject(err);
+          alert(err.error.restext);
         });
     });
   }

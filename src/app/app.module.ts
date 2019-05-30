@@ -12,8 +12,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {TabMenuModule} from 'primeng/tabmenu';
-import {MenuItem} from 'primeng/api';
 import { StuffComponent } from './stuff/stuff.component';
+
 
 const routes: Routes = [
   {path: 'user', component: UserComponent},

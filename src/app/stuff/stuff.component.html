@@ -1,3 +1,66 @@
-<p>
-  stuff works!
-</p>
+<div>
+  <p-dialog header="Stuff Registration Form" [(visible)]="displayAdd" [modal]="true" [responsive]="true"
+            [style]="{width: '350px', minWidth: '200px'}" [minY]="70"
+            [maximizable]="true" [baseZIndex]="10000">
+    <p>
+      Type: <input type="text" pInputText [(ngModel)]="inputBody.type"/><br/>
+      Author: <input type="text" pInputText [(ngModel)]="inputBody.author"/><br/>
+      Title: <input type="text" pInputText [(ngModel)]="inputBody.title"/><br/>
+      Date: <input type="text" pInputText [(ngModel)]="inputBody.date"/><br/>
+      StuffID: <input type="text" pInputText [(ngModel)]="inputBody.stuffID"/><br/>
+    </p>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="addStuff(inputBody);displayAdd=false" label="Yes">Add</button>
+      <button type="button" pButton icon="pi pi-close" (click)="displayAdd=false" label="No"
+              class="ui-button-secondary">Close
+      </button>
+    </p-footer>
+  </p-dialog>
+</div>
+
+<button class="btn-dark pt-2" pButton (click)="showAdd()" icon="pi pi-info-circle" label="Show">Add Stuff</button>
+
+<div class="row" *ngIf="stuffs">
+  <div class="card w-100">
+    <div class="card-header">List of stuffs</div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Type</th>
+          <th>Author</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>StuffID</th>
+          <th>status</th>
+          <th>UserID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let stuff of stuffs">
+          <td>
+            {{stuff.type}}
+          </td>
+          <td>
+            {{stuff.author}}
+          </td>
+          <td>
+            {{stuff.title}}
+          </td>
+          <td>
+            {{stuff.date}}
+          </td>
+          <td>
+            {{stuff.stuffID}}
+          </td>
+          <td>
+            {{stuff.status}}
+          </td>
+          <td>
+            {{stuff.rentID}}
+          </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
