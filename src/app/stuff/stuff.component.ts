@@ -32,6 +32,13 @@ export class StuffComponent implements OnInit {
   async addStuff(filter) {
     await this.StuffService.addStuff(filter);
     this.getStuffs();
+    this.inputBody = {
+      type: '',
+      author: '',
+      title: '',
+      date: '',
+      stuffID: ''
+    };
   }
 
   ngOnInit() {

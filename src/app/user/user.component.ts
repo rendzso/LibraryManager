@@ -87,6 +87,13 @@ export class UserComponent implements OnInit {
   async addUser() {
     await this.UserHandlerService.addUser(this.inputBody);
     this.getData();
+    this.inputBody = {
+      name: '',
+      userID: '',
+      phone: '',
+      livingPlace: '',
+      personalID: ''
+    };
   }
 
   async deleteUser(filter) {
