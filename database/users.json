@@ -1,3 +1,3 @@
-{"_id":{"$oid":"5cc4286036312b1bf62c1b66"},"name":"Hugyos Pista","userID":"user02","phone":"06-30-1234-567","livingPlace":"Kukutyin 2","personalID":"B12345"}
+{"_id":{"$oid":"5cc4286036312b1bf62c1b66"},"name":"Nagy Pista","userID":"user02","phone":"06-30-1234-567","livingPlace":"Kukutyin 2","personalID":"B12345"}
 {"_id":{"$oid":"5cda8f50ed23e11da2b353ae"},"name":"Proba","userID":"vagyok","phone":"06-20-234-6343","livingPlace":"Budapest","personalID":"B23123"}
 {"_id":{"$oid":"5cda90a6ed23e11da2b353af"},"name":"Bernárt János","userID":"janika","phone":"NA","livingPlace":"Balatonfüred","personalID":"A23123"}
