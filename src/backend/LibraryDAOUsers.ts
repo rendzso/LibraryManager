@@ -1,7 +1,7 @@
 import {MongoClient, Db} from 'mongodb';
 import * as moment from 'moment';
 
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://172.21.0.10:27017';
 const dbname = 'LibraryManager';
 const collectionname = 'LibraryManagerUsers';
 let db: Db;
@@ -98,20 +98,20 @@ export async function backAStuff(user, stuff) {
   });
 }
 
-function rented() {
+function rented(user) {
   return new Promise(async resolve => {
     const client = new MongoClient(url);
     db = await client.connect(() => {
       console.log('connected to db');
       db = client.db(dbname);
-      resolve(db.collection("LibraryManagerRented").find().toArray());
+      resolve(db.collection("LibraryManagerRented").find({"userID": user}).toArray());
       client.close();
     });
   });
 }
 
-export async function listOfRentedStuffs() {
-  const resoult = await rented();
+export async function listOfRentedStuffs(user) {
+  const resoult = await rented(user);
   return resoult;
 }
 

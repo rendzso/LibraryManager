@@ -34,7 +34,7 @@ router.post('/add', async (req, res) => {
 });
 
 router.get('/rented', async (req, res) => {
-  res.status(200).send(await srs.listOfRentedStuffs());
+  res.status(200).send(await srs.listOfRentedStuffs(req.query));
 });
 
 // @ts-ignore

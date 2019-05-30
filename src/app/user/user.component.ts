@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ServiceService} from '../service.service';
 
 /*{"name":"Erno Geza",
@@ -15,44 +15,80 @@ import {ServiceService} from '../service.service';
 })
 export class UserComponent implements OnInit {
 
-  users: any;
+  users: [];
+  rented: [];
+  update = {
+    name: '',
+    userID: '',
+    phone: '',
+    livingPlace: '',
+    personalID: ''
+  };
   count: any;
   inputBody = {
     name: '',
     userID: '',
-    phone: ',',
+    phone: '',
     livingPlace: '',
     personalID: ''
+  };
+
+  constructor(private UserHandlerService: ServiceService) {
   }
 
-  constructor(private UserHandlerService: ServiceService) { }
+  displayRegister: boolean = false;
+  displayUpdate: boolean = false;
+  displayRented: boolean = false;
 
-  display: boolean = false;
-
-  getInputfield(){
-    console.log(this.inputBody);
-  }
 
   showDialog() {
-    this.display = true;
+    this.displayRegister = true;
   }
 
+  showUpdate(user) {
+    this.update.name = user.name;
+    this.update.userID = user.userID;
+    this.update.phone = user.phone;
+    this.update.livingPlace = user.livingPlace;
+    this.update.personalID = user.personalID;
+    this.displayUpdate = true;
+  }
+
+  async showRented(user) {
+    this.rented = await this.UserHandlerService.rented(user);
+    this.displayRented = true;
+  }
 
   async getData() {
     this.users = await this.UserHandlerService.getAllUser();
-    return this.users; }
+  }
 
-    async getCount(filter) {
+  async getCount(filter) {
     this.count = await this.UserHandlerService.count(filter);
-    console.log(this.count)
-    return this.count;
-    }
+    alert(this.count.asd);
+  }
 
-    async addUser() {
-      await this.UserHandlerService.addUser(this.inputBody);
-    }
+  async addUser() {
+    await this.UserHandlerService.addUser(this.inputBody);
+    this.getData();
+  }
 
-    ngOnInit() {
+  async deleteUser(filter) {
+    await this.UserHandlerService.deleteUser(filter);
+    this.getData();
+  }
+
+  async updateUser(filter) {
+    await this.UserHandlerService.updateUser(filter);
+    this.getData();
+  }
+
+  async backStuff(filter) {
+    await this.UserHandlerService.backStuff(filter);
+  }
+
+  ngOnInit() {
+    this.getData();
   }
 
 }

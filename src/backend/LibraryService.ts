@@ -67,8 +67,8 @@ export async function listOfLateness() {
   return(await LibraryDAOUsers.listOfLateness());
 }
 
-export async function listOfRentedStuffs() {
-  return(await LibraryDAOUsers.listOfRentedStuffs());
+export async function listOfRentedStuffs(user) {
+  return(await LibraryDAOUsers.listOfRentedStuffs(user));
 }
 
 export async function countByUser(user) {
