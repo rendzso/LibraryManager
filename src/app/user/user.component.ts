@@ -17,6 +17,8 @@ export class UserComponent implements OnInit {
 
   users: [];
   rented: [];
+  stuffs: [];
+  idForRent: '';
   update = {
     name: '',
     userID: '',
@@ -39,6 +41,7 @@ export class UserComponent implements OnInit {
   displayRegister: boolean = false;
   displayUpdate: boolean = false;
   displayRented: boolean = false;
+  displayRent: boolean = false;
 
 
   showDialog() {
@@ -57,6 +60,12 @@ export class UserComponent implements OnInit {
   async showRented(user) {
     this.rented = await this.UserHandlerService.rented(user);
     this.displayRented = true;
+  }
+
+  async showRent(user) {
+    this.stuffs = await this.UserHandlerService.getAllStuffs();
+    this.idForRent = user;
+    this.displayRent = true;
   }
 
   async getData() {
@@ -85,6 +94,12 @@ export class UserComponent implements OnInit {
 
   async backStuff(filter) {
     await this.UserHandlerService.backStuff(filter);
+    this.rented = await this.UserHandlerService.rented(filter.userID);
+  }
+
+  async rentStuff(filter) {
+    await this.UserHandlerService.rentStuff(filter);
+    this.stuffs = await this.UserHandlerService.getAllStuffs();
   }
 
   ngOnInit() {

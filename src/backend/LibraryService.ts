@@ -36,6 +36,11 @@ export async function listAllStuffs(data) {
   return(await LibraryDAOStuffs.readAll(data));
 }
 
+export async function listAllOpen(data) {
+  data = {status: 'open'}
+  return(await LibraryDAOStuffs.readAll(data));
+}
+
 export async function addNewStuff(data) {
   if ((await LibraryDAOStuffs.exists(data.stuffID)) === 1) {
     return 'The ID is already exists!';

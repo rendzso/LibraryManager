@@ -71,15 +71,16 @@ router.post('/update', async (req, res) => {
 });
 
 router.post('/rent', async (req, res) => {
-  if (req.query.userID === undefined || req.query.userID === '') {
-    res.status(414).send('UserID name is missing!');
+  if (req.body.userID === undefined || req.body.userID === '') {
+    res.status(414).send({restext: 'UserID name is missing!'});
     return;
   }
-  if (req.query.stuffID === undefined || req.query.stuffID === '') {
-    res.status(414).send('UserID name is missing!');
+  if (req.body.stuffID === undefined || req.body.stuffID === '') {
+    res.status(414).send({restext: 'UserID name is missing!'});
     return;
   }
-  res.status(200).send(await srs.rentAStuff(req.query.userID, req.query.stuffID));
+  const valami = await srs.rentAStuff(req.body.userID, req.body.stuffID)
+  res.status(200).send({restext: valami});
 });
 
 router.post('/back', async (req, res) => {

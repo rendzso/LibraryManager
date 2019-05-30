@@ -68,6 +68,42 @@
   </p-dialog>
 </div>
 
+<div>
+  <p-dialog header="Rent Some Stuff" [(visible)]="displayRent" [modal]="true" [responsive]="true"
+            [style]="{width: '500px', minWidth: '200px'}" [minY]="70"
+            [maximizable]="true" [baseZIndex]="10000">
+    <div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Type</th>
+          <th>Author</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>StuffID</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let stuff of stuffs">
+          <td>{{stuff.type}}</td>
+          <td>{{stuff.author}}</td>
+          <td>{{stuff.title}}</td>
+          <td>{{stuff.stuffID}}</td>
+          <td>{{stuff.status}}</td>
+          <td><button class="btn-dark" (click)="rentStuff({stuffID: stuff.stuffID, userID: idForRent})">Rent</button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-close" (click)="displayRent=false" label="No"
+              class="ui-button-secondary">Close
+      </button>
+    </p-footer>
+  </p-dialog>
+</div>
+
 <button class="btn-dark pt-2" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Add User</button>
 
 <div class="row" *ngIf="users">
@@ -101,7 +137,7 @@
           <td>
             {{user.personalID}}
           </td>
-          <td><button class="btn-dark">Rent</button></td>
+          <td><button class="btn-dark" (click)="showRent(user.userID)">Rent</button></td>
           <td><button class="btn-dark" (click)="showRented(user.userID)">Back</button></td>
           <td><button class="btn-dark" (click)="showUpdate(user)">Update</button></td>
           <td><button class="btn-dark" (click)="deleteUser(user.userID)">Delete</button></td>

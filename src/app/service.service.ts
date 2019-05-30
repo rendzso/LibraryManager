@@ -69,13 +69,15 @@ deleteUser(filter) {
 
   rentStuff(filter) {
     return new Promise((resolve, reject) => {
-      const params = new HttpParams().set('filter', filter);
-      this.http.post('http://localhost:8080/users/rent', {params: {param: JSON.stringify(filter)}})
+      console.log(filter)
+      this.http.post('http://localhost:8080/users/rent', filter)
         .subscribe(res => {
           resolve(res);
-          console.log(res);
+          // @ts-ignore
+          alert(res.restext);
         }, (err) => {
           reject(err);
+          alert(err.error.restext);
         });
     });
   }
@@ -133,7 +135,7 @@ deleteUser(filter) {
 
   getAllStuffs(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:8080/stuffs/list')
+      this.http.get('http://localhost:8080/stuffs/open')
         .subscribe(res => {
           resolve(res);
         }, (err) => {

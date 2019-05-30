@@ -7,6 +7,10 @@ router.get('/list', async (req, res) => {
   res.status(200).send(await srs.listAllStuffs(req.query));
 });
 
+router.get('/open', async (req, res) => {
+  res.status(200).send(await srs.listAllOpen(req.query));
+});
+
 router.post('/add', async (req, res) => {
   if (req.body.type === undefined || req.body.type === '') {
     res.status(414).send('Type is missing!');
