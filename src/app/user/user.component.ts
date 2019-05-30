@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   users: [];
   rented: [];
   stuffs: [];
+  late: [];
   idForRent: '';
   update = {
     name: '',
@@ -42,6 +43,7 @@ export class UserComponent implements OnInit {
   displayUpdate: boolean = false;
   displayRented: boolean = false;
   displayRent: boolean = false;
+  displayLate: boolean = false;
 
 
   showDialog() {
@@ -66,6 +68,11 @@ export class UserComponent implements OnInit {
     this.stuffs = await this.UserHandlerService.getAllStuffs();
     this.idForRent = user;
     this.displayRent = true;
+  }
+
+  async showLateness() {
+    this.late = await this.UserHandlerService.listLateness();
+    this.displayLate = true;
   }
 
   async getData() {

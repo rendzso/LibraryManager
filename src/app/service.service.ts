@@ -69,7 +69,6 @@ deleteUser(filter) {
 
   rentStuff(filter) {
     return new Promise((resolve, reject) => {
-      console.log(filter)
       this.http.post('http://localhost:8080/users/rent', filter)
         .subscribe(res => {
           resolve(res);
@@ -84,7 +83,6 @@ deleteUser(filter) {
 
   backStuff(filter) {
     return new Promise((resolve, reject) => {
-      console.log(filter);
       this.http.post('http://localhost:8080/users/back', filter)
         .subscribe(res => {
           resolve(res);
@@ -102,7 +100,6 @@ deleteUser(filter) {
       this.http.get('http://localhost:8080/users/late')
         .subscribe(res => {
           resolve(res);
-          console.log(res);
         }, (err) => {
           reject(err);
         });

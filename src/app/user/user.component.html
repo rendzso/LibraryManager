@@ -104,7 +104,40 @@
   </p-dialog>
 </div>
 
+<div>
+  <p-dialog header="List of lateness" [(visible)]="displayLate" [modal]="true" [responsive]="true"
+            [style]="{width: '500px', minWidth: '200px'}" [minY]="70"
+            [maximizable]="true" [baseZIndex]="10000">
+    <div>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>UserID</th>
+          <th>StuffID</th>
+          <th>Date of Rent</th>
+          <th>Date of Back</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let stuff of late">
+          <td>{{stuff.userID}}</td>
+          <td>{{stuff.stuffID}}</td>
+          <td>{{stuff.dateOfRent}}</td>
+          <td>{{stuff.dateOfBack}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-close" (click)="displayLate=false" label="No"
+              class="ui-button-secondary">Close
+      </button>
+    </p-footer>
+  </p-dialog>
+</div>
+
 <button class="btn-dark pt-2" (click)="showDialog()" pButton icon="pi pi-info-circle" label="Show">Add User</button>
+<button class="btn-dark pt-2" (click)="showLateness()" pButton icon="pi pi-info-circle" label="Show">Show Lateness</button>
 
 <div class="row" *ngIf="users">
   <div class="card w-100">
@@ -119,7 +152,7 @@
           <th>Living Place</th>
           <th>Personal ID</th>
         </tr>
-        </thead>
+        </thead>and db added
         <tbody>
         <tr *ngFor="let user of users" [style.background-color]="user.itsDeleted === 'deleted' ? 'red': null ">
           <td >
